@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Upload, X, Image as ImageIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import React, { useState, useRef } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Upload, X, Image as ImageIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface LogoUploadProps {
   logo: File | null;
@@ -10,12 +10,16 @@ interface LogoUploadProps {
   onLogoChange: (file: File | null, url: string) => void;
 }
 
-export default function LogoUpload({ logo, logoUrl, onLogoChange }: LogoUploadProps) {
+export default function LogoUpload({
+  logo,
+  logoUrl,
+  onLogoChange,
+}: LogoUploadProps) {
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = (file: File) => {
-    if (file && file.type.startsWith('image/')) {
+    if (file && file.type.startsWith("image/")) {
       const url = URL.createObjectURL(file);
       onLogoChange(file, url);
     }
@@ -24,7 +28,7 @@ export default function LogoUpload({ logo, logoUrl, onLogoChange }: LogoUploadPr
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
-    
+
     const files = Array.from(e.dataTransfer.files);
     if (files.length > 0) {
       handleFileSelect(files[0]);
@@ -52,9 +56,9 @@ export default function LogoUpload({ logo, logoUrl, onLogoChange }: LogoUploadPr
     if (logoUrl) {
       URL.revokeObjectURL(logoUrl);
     }
-    onLogoChange(null, '');
+    onLogoChange(null, "");
     if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+      fileInputRef.current.value = "";
     }
   };
 
@@ -109,7 +113,7 @@ export default function LogoUpload({ logo, logoUrl, onLogoChange }: LogoUploadPr
               "border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors",
               isDragOver
                 ? "border-primary bg-primary/5"
-                : "border-gray-300 hover:border-primary/50 hover:bg-gray-50"
+                : "border-gray-300 hover:border-primary/50 hover:bg-gray-50",
             )}
             onDrop={handleDrop}
             onDragOver={handleDragOver}
@@ -136,7 +140,7 @@ export default function LogoUpload({ logo, logoUrl, onLogoChange }: LogoUploadPr
             </div>
           </div>
         )}
-        
+
         <input
           ref={fileInputRef}
           type="file"
@@ -144,7 +148,7 @@ export default function LogoUpload({ logo, logoUrl, onLogoChange }: LogoUploadPr
           onChange={handleFileInputChange}
           className="hidden"
         />
-        
+
         <div className="text-xs text-muted-foreground space-y-1">
           <p>• Recommended size: 200x200px or larger</p>
           <p>• Logo will appear on your reward vouchers</p>

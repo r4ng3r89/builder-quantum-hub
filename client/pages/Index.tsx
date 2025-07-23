@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Upload, Gift, Palette, Settings, Eye, Save } from 'lucide-react';
-import LogoUpload from '@/components/LogoUpload';
-import VoucherCustomizer from '@/components/VoucherCustomizer';
-import VoucherPreview from '@/components/VoucherPreview';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Upload, Gift, Palette, Settings, Eye, Save } from "lucide-react";
+import LogoUpload from "@/components/LogoUpload";
+import VoucherCustomizer from "@/components/VoucherCustomizer";
+import VoucherPreview from "@/components/VoucherPreview";
 
 interface CampaignData {
   name: string;
@@ -26,43 +26,44 @@ interface CampaignData {
     termsAndConditions: string;
     maxRedemptions: number;
     validityDays: number;
-    discountType: 'percentage' | 'fixed';
+    discountType: "percentage" | "fixed";
     discountValue: number;
   };
 }
 
 export default function Index() {
-  const [currentTab, setCurrentTab] = useState('campaign');
+  const [currentTab, setCurrentTab] = useState("campaign");
   const [campaignData, setCampaignData] = useState<CampaignData>({
-    name: '',
-    description: '',
-    startDate: '',
-    endDate: '',
+    name: "",
+    description: "",
+    startDate: "",
+    endDate: "",
     logo: null,
-    logoUrl: '',
+    logoUrl: "",
     voucherConfig: {
-      primaryColor: '#8B5CF6',
-      secondaryColor: '#22C55E',
-      textColor: '#1F2937',
-      title: 'Exclusive Reward',
-      description: 'Thank you for being a valued customer!',
-      termsAndConditions: 'Valid for 30 days from issue date. Cannot be combined with other offers.',
+      primaryColor: "#8B5CF6",
+      secondaryColor: "#22C55E",
+      textColor: "#1F2937",
+      title: "Exclusive Reward",
+      description: "Thank you for being a valued customer!",
+      termsAndConditions:
+        "Valid for 30 days from issue date. Cannot be combined with other offers.",
       maxRedemptions: 100,
       validityDays: 30,
-      discountType: 'percentage',
+      discountType: "percentage",
       discountValue: 10,
     },
   });
 
   const handleCampaignDataChange = (field: string, value: any) => {
-    setCampaignData(prev => ({
+    setCampaignData((prev) => ({
       ...prev,
       [field]: value,
     }));
   };
 
   const handleVoucherConfigChange = (field: string, value: any) => {
-    setCampaignData(prev => ({
+    setCampaignData((prev) => ({
       ...prev,
       voucherConfig: {
         ...prev.voucherConfig,
@@ -72,7 +73,7 @@ export default function Index() {
   };
 
   const handleSaveCampaign = () => {
-    console.log('Saving campaign:', campaignData);
+    console.log("Saving campaign:", campaignData);
     // Here you would typically send the data to your backend
   };
 
@@ -90,10 +91,15 @@ export default function Index() {
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                   RewardsCraft
                 </h1>
-                <p className="text-sm text-muted-foreground">Campaign Creation Studio</p>
+                <p className="text-sm text-muted-foreground">
+                  Campaign Creation Studio
+                </p>
               </div>
             </div>
-            <Button onClick={handleSaveCampaign} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+            <Button
+              onClick={handleSaveCampaign}
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+            >
               <Save className="h-4 w-4 mr-2" />
               Save Campaign
             </Button>
@@ -106,9 +112,16 @@ export default function Index() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Left Panel - Campaign Configuration */}
           <div className="lg:col-span-2 space-y-6">
-            <Tabs value={currentTab} onValueChange={setCurrentTab} className="w-full">
+            <Tabs
+              value={currentTab}
+              onValueChange={setCurrentTab}
+              className="w-full"
+            >
               <TabsList className="grid w-full grid-cols-4 mb-6">
-                <TabsTrigger value="campaign" className="flex items-center gap-2">
+                <TabsTrigger
+                  value="campaign"
+                  className="flex items-center gap-2"
+                >
                   <Settings className="h-4 w-4" />
                   <span className="hidden sm:inline">Campaign</span>
                 </TabsTrigger>
@@ -120,7 +133,10 @@ export default function Index() {
                   <Palette className="h-4 w-4" />
                   <span className="hidden sm:inline">Design</span>
                 </TabsTrigger>
-                <TabsTrigger value="preview" className="flex items-center gap-2">
+                <TabsTrigger
+                  value="preview"
+                  className="flex items-center gap-2"
+                >
                   <Eye className="h-4 w-4" />
                   <span className="hidden sm:inline">Preview</span>
                 </TabsTrigger>
@@ -142,7 +158,9 @@ export default function Index() {
                           id="campaignName"
                           placeholder="Enter campaign name"
                           value={campaignData.name}
-                          onChange={(e) => handleCampaignDataChange('name', e.target.value)}
+                          onChange={(e) =>
+                            handleCampaignDataChange("name", e.target.value)
+                          }
                         />
                       </div>
                       <div className="space-y-2">
@@ -151,7 +169,12 @@ export default function Index() {
                           id="startDate"
                           type="date"
                           value={campaignData.startDate}
-                          onChange={(e) => handleCampaignDataChange('startDate', e.target.value)}
+                          onChange={(e) =>
+                            handleCampaignDataChange(
+                              "startDate",
+                              e.target.value,
+                            )
+                          }
                         />
                       </div>
                     </div>
@@ -162,7 +185,9 @@ export default function Index() {
                           id="endDate"
                           type="date"
                           value={campaignData.endDate}
-                          onChange={(e) => handleCampaignDataChange('endDate', e.target.value)}
+                          onChange={(e) =>
+                            handleCampaignDataChange("endDate", e.target.value)
+                          }
                         />
                       </div>
                       <div className="space-y-2">
@@ -172,7 +197,12 @@ export default function Index() {
                           type="number"
                           placeholder="100"
                           value={campaignData.voucherConfig.maxRedemptions}
-                          onChange={(e) => handleVoucherConfigChange('maxRedemptions', parseInt(e.target.value) || 0)}
+                          onChange={(e) =>
+                            handleVoucherConfigChange(
+                              "maxRedemptions",
+                              parseInt(e.target.value) || 0,
+                            )
+                          }
                         />
                       </div>
                     </div>
@@ -183,7 +213,12 @@ export default function Index() {
                         placeholder="Describe your campaign..."
                         rows={3}
                         value={campaignData.description}
-                        onChange={(e) => handleCampaignDataChange('description', e.target.value)}
+                        onChange={(e) =>
+                          handleCampaignDataChange(
+                            "description",
+                            e.target.value,
+                          )
+                        }
                       />
                     </div>
                   </CardContent>
@@ -195,8 +230,8 @@ export default function Index() {
                   logo={campaignData.logo}
                   logoUrl={campaignData.logoUrl}
                   onLogoChange={(file, url) => {
-                    handleCampaignDataChange('logo', file);
-                    handleCampaignDataChange('logoUrl', url);
+                    handleCampaignDataChange("logo", file);
+                    handleCampaignDataChange("logoUrl", url);
                   }}
                 />
               </TabsContent>
